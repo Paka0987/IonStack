@@ -88,8 +88,8 @@
 /* PID/TGID — between new TASKS(0x628) and new COMM(0x850).
  * Old distance from TASKS to PID was 0x100; estimated unchanged delta.
  * Best estimate: 0x628 + 0x100 = 0x728. Adjust if task walk finds wrong proc. */
-#define TASK_PID_OFF            0x728ULL  /* was 0x5C0 — ESTIMATE, verify */
-#define TASK_TGID_OFF           0x72CULL  /* was 0x5C4 — ESTIMATE, verify */
+#define TASK_PID_OFF    0x6c8ULL  // was 0x728 (ESTIMATE) — now confirmed
+#define TASK_TGID_OFF   0x6ccULL  // was 0x72C (ESTIMATE) — now confirmed
 #define TASK_REAL_PARENT_OFF    0x740ULL  /* was 0x5D0 — ESTIMATE         */
 #define TASK_ATOMIC_FLAGS_OFF   0x6F0ULL  /* was 0x588 — ESTIMATE         */
 
