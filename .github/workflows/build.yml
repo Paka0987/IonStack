@@ -1,0 +1,32 @@
+name: Build preload
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        description: 'PROJECT target'
+        required: true
+        default: 'eureka-52433670036000520'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download NDK
+        run: |
+          wget -q https://dl.google.com/android/repository/android-ndk-r29-linux.zip
+          unzip -q android-ndk-r29-linux.zip
+
+      - name: Build
+        run: |
+          export ANDROID_NDK_HOME=$PWD/android-ndk-r29
+          export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH
+          make PROJECT=${{ github.event.inputs.project }}
+
+      - name: Upload preload
+        uses: actions/upload-artifact@v4
+        with:
+          name: preload-${{ github.event.inputs.project }}
+          path: build/${{ github.event.inputs.project }}/bin/preload
