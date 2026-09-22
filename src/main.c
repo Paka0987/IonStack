@@ -155,6 +155,8 @@ static void *cfi_thread(void *arg __attribute__((unused))){
     }
     pr_info("enter CFI stage\n");
     try_cfi_stage();
+    pr_info("cfi result: step=%d errno=%d write=%zd read=%zd readslot=%zd\n",
+        cfi_last_step, cfi_last_errno, cfi_write_ret, cfi_read_ret, cfi_read_slot_ret);
   }
 }
 void run_main_route_threads(void) {
