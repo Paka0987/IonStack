@@ -28,6 +28,7 @@ void do_stamp_stack(uint64_t *buf) {
         return;
     }
     memset(buffer, 0, sizeof(buffer));
+    pr_info("stamp: socketcall path off=0x70\n");
     memcpy(buffer + 0x70, buf, 0x50);   // was 0x34, now 0x70
     uint64_t times = 10000000;
 
