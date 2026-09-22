@@ -870,14 +870,17 @@ ssize_t configfs_write_once(int fd, uintptr_t target, const void *data, size_t l
   errno = 0;
   int set_ret = try_set_ashmem_name_blob(fd, blob, sizeof(blob));
   int set_errno = errno;
-  if (set_ret != 0) {
+  pr_info("dbg: set_ret=%d set_errno=%d target=0x%016llx off=0x%llx\n",
+        set_ret, set_errno, (unsigned long long)target, (unsigned long long)off);
+if (set_ret != 0) {
     errno = set_errno;
     return -1;
-  }
-
-  errno = 0;
-  ssize_t wr = pwrite(fd, data, len, off);
-  return wr;
+}
+errno = 0;
+ssize_t wr = pwrite(fd, data, len, off);
+// ADD THIS:
+pr_info("dbg: pwrite=%zd pwrite_errno=%d\n", wr, errno);
+return wr;
 }
 
 ssize_t configfs_read_once(int fd, uintptr_t target, void *data, size_t len) {
