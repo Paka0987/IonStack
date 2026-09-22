@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/syscall.h>
 
 #include "kernelsnitch/utils.h"
 
